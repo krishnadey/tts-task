@@ -2,6 +2,7 @@ package tts.task.entity;
 
 import tts.task.category.CategoryType;
 import tts.task.category.MovieCategory;
+import tts.task.category.MovieCategoryFactory;
 
 public class Movie {
     private String title;
@@ -9,7 +10,7 @@ public class Movie {
 
     public Movie(String title, CategoryType categoryType) {
         this.title = title;
-        // create a factory class to get specific category object
+        this.category = MovieCategoryFactory.createCategory(categoryType);
     }
 
     public String getTitle() {
