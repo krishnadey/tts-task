@@ -6,7 +6,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ChildrenCategoryTest {
-
     @ParameterizedTest
     @CsvSource({
             "0, 0", // Case 1: When rented day is 0

@@ -7,7 +7,6 @@ import tts.task.category.CategoryType;
 import tts.task.category.MovieCategory;
 
 public class MovieTest {
-
     @Test
     void getCategory() {
         Movie movie = new Movie("Inception", CategoryType.NEW_RELEASE);

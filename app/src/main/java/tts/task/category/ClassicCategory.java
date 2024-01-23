@@ -28,4 +28,3 @@ class ClassicCategory implements MovieCategory {
         return daysRented > 0 ? daysRented : 0;
     }
 }
-
