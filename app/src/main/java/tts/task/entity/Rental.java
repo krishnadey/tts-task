@@ -16,4 +16,12 @@ public class Rental {
     public int getDaysRented() {
         return daysRented;
     }
+
+    public double calculateRentalAmount() {
+        return movie.getCategory().calculateRentalAmount(daysRented);
+    }
+
+    public int calculateRewardPoints() {
+        return movie.getCategory().calculateRewardPoints(daysRented);
+    }
 }

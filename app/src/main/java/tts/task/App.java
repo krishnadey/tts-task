@@ -23,8 +23,8 @@ public class App {
         customer.addRental(rental2);
         customer.addRental(rental3);
 
-        String statement = customer.statement();
+        String statement = customer.generateStatement();
 
-        System.out.println("Total Amount: " + statement);
+        System.out.println(statement);
     }
 }

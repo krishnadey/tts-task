@@ -8,6 +8,9 @@ class NewReleaseCategory implements MovieCategory {
 
     @Override
     public int calculateRewardPoints(int daysRented) {
-        return daysRented > 1 ? 2 : 1;
+        if (daysRented > 0) {
+            return daysRented > 1 ? 2 : 1;
+        }
+        return 0;
     }
 }

@@ -23,7 +23,7 @@ public class Customer {
     public double calculateTotalAmount() {
         double totalAmount = 0;
         for (Rental rental : rentals) {
-            totalAmount += rental.getMovie().getCategory().calculateRentalAmount(rental.getDaysRented());
+            totalAmount += rental.calculateRentalAmount();
         }
         return totalAmount;
     }
@@ -31,25 +31,33 @@ public class Customer {
     public int calculateTotalRewardPoints() {
         int totalRewardPoints = 0;
         for (Rental rental : rentals) {
-            totalRewardPoints += rental.getMovie().getCategory().calculateRewardPoints(rental.getDaysRented());
+            totalRewardPoints += rental.calculateRewardPoints();
         }
         return totalRewardPoints;
     }
 
-    public String statement() {
+    public String generateStatement() {
         double totalAmount = 0;
         int totalRewardPoints = 0;
-        String result = "Rental record for " + getName() + "\n";
+        StringBuilder result = new StringBuilder("Rental record for " + getName() + "\n\n");
+        result.append(String.format("%-20s%-15s%-10s\n", "Movie Name", "Rented Days", "Amount"));
 
         for (Rental rental : rentals) {
-            double amount = rental.getMovie().getCategory().calculateRentalAmount(rental.getDaysRented());
-            totalRewardPoints += rental.getMovie().getCategory().calculateRewardPoints(rental.getDaysRented());
-            result += "\t" + rental.getMovie().getTitle() + "\t" + String.valueOf(amount) + "\n";
+            double amount = rental.calculateRentalAmount();
+            result.append(String.format("%-20s%-15s%-10s\n",
+                    rental.getMovie().getTitle(),
+                    rental.getDaysRented(),
+                    formatAmount(amount)));
             totalAmount += amount;
+            totalRewardPoints += rental.calculateRewardPoints();
         }
 
-        result += "Amount owed is " + String.valueOf(totalAmount) + "\n";
-        result += "You earned " + String.valueOf(totalRewardPoints) + " frequent renter points";
-        return result;
+        result.append("\nTotal amount owed is ").append(formatAmount(totalAmount)).append("\n");
+        result.append("\nYou earned ").append(totalRewardPoints).append(" frequent renter points");
+        return result.toString();
+    }
+
+    private String formatAmount(double amount) {
+        return String.format("$%.2f", amount);
     }
 }

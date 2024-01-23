@@ -9,6 +9,8 @@ public class MovieCategoryFactory {
                 return new RegularCategory();
             case CLASSIC:
                 return new ClassicCategory();
+            case CHILDREN:
+                return new ChildrenCategory();
             default:
                 throw new IllegalArgumentException("Invalid category type");
         }
