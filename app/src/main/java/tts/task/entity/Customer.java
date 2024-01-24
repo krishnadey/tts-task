@@ -3,13 +3,15 @@ package tts.task.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import tts.task.promotion.Rent3Get1FreePromotion;
+
 public class Customer {
     private String name;
     private List<Rental> rentals;
 
     public Customer(String name) {
         this.name = name;
-        this.rentals = new ArrayList<>();
+        this.rentals = new ArrayList<Rental>();
     }
 
     public String getName() {
@@ -50,6 +52,12 @@ public class Customer {
                     formatAmount(amount)));
             totalAmount += amount;
             totalRewardPoints += rental.calculateRewardPoints();
+        }
+
+        Rental appliedRental = Rent3Get1FreePromotion.getApplicablePromotionRental(rentals);
+        if (appliedRental != null) {
+            result.append("\n Promotion Applied. You got " + appliedRental.getMovie().getTitle() + " Free.\n");
+            totalAmount -= appliedRental.calculateRentalAmount();
         }
 
         result.append("\nTotal amount owed is ").append(formatAmount(totalAmount)).append("\n");
